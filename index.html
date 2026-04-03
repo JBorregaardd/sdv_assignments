@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drug Offenses in San Francisco | Data Story</title>
+  <meta name="description" content="A magazine-style narrative visualization about drug offense patterns in San Francisco." />
+  <style>
+    :root {
+      --bg: #f7f4ee;
+      --paper: #fffdf8;
+      --ink: #1f1f1f;
+      --muted: #5a5a5a;
+      --line: #d8d0c4;
+      --accent: #7c3f2c;
+      --accent-soft: #efe3dc;
+      --shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+      --max: 1100px;
+      --text: 700px;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: linear-gradient(180deg, #f4efe6 0%, var(--bg) 18%, #f8f6f1 100%);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    img, iframe {
+      display: block;
+      max-width: 100%;
+      border: 0;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .page-shell {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(247, 244, 238, 0.88);
+      border-bottom: 1px solid rgba(124, 63, 44, 0.08);
+    }
+
+    .topbar-inner {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+      font-size: 0.95rem;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+    }
+
+    header.hero {
+      padding: 72px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: end;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.5rem, 5vw, 4.7rem);
+      line-height: 0.98;
+      margin: 12px 0 18px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .standfirst {
+      font-size: 1.18rem;
+      color: #2d2d2d;
+      max-width: 56ch;
+      margin: 0 0 22px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .hero-note {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .hero-note h2 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .hero-note p,
+    .hero-note li {
+      font-size: 0.98rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .hero-note ul {
+      padding-left: 18px;
+      margin: 12px 0 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+      margin: 26px 0 14px;
+    }
+
+    .intro,
+    .section-copy,
+    .outro {
+      width: min(100%, var(--text));
+      margin: 0 auto;
+    }
+
+    .intro p,
+    .section-copy p,
+    .outro p {
+      font-size: 1.08rem;
+      margin: 0 0 1rem;
+    }
+
+    section.story-block {
+      padding: 34px 0 22px;
+    }
+
+    .section-label {
+      margin-bottom: 8px;
+    }
+
+    h2.block-title {
+      width: min(100%, var(--text));
+      margin: 0 auto 10px;
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+
+    figure.viz-card {
+      margin: 26px auto 24px;
+      width: min(100%, 980px);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .viz-frame {
+      padding: 18px;
+      background: linear-gradient(180deg, #fffdf8 0%, #faf6f0 100%);
+    }
+
+    .viz-frame img,
+    .viz-frame iframe {
+      width: 100%;
+      border-radius: 12px;
+      background: white;
+      min-height: 420px;
+    }
+
+    .viz-frame img {
+      object-fit: contain;
+      min-height: auto;
+    }
+
+    figcaption {
+      padding: 16px 20px 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.96rem;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .callout {
+      width: min(100%, var(--text));
+      margin: 24px auto 0;
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 16px 18px;
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+
+    .two-col-note {
+      width: min(100%, 900px);
+      margin: 26px auto 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .mini-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .mini-card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    footer {
+      padding: 42px 0 70px;
+    }
+
+    .footer-box {
+      width: min(100%, 900px);
+      margin: 0 auto;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.92rem;
+    }
+
+    code.inline {
+      background: rgba(124, 63, 44, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 0.35rem;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .two-col-note {
+        grid-template-columns: 1fr;
+      }
+
+      header.hero {
+        padding-top: 48px;
+      }
+
+      .viz-frame iframe {
+        min-height: 340px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .intro p,
+      .section-copy p,
+      .outro p,
+      .standfirst {
+        font-size: 1rem;
+      }
+
+      .viz-frame {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="eyebrow">02460 Data Story</div>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#intro">Intro</a>
+        <a href="#trend">Trend</a>
+        <a href="#map">Map</a>
+        <a href="#explore">Interactive</a>
+        <a href="#notes">Notes</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Magazine-style narrative visualization</div>
+          <h1>How drug offense patterns changed across San Francisco</h1>
+          <p class="standfirst">
+            This page is built as a linear data story: the reader moves from a broad time trend,
+            to geography, to a final interactive view that invites closer inspection. The structure
+            follows the Week 8 brief: short, author-driven, and centered on exactly three visualizations.
+          </p>
+          <div class="meta">
+            <span><strong>Course:</strong> Social Data Analysis and Visualization</span>
+            <span><strong>Format:</strong> single-page story</span>
+            <span><strong>Visuals:</strong> 1 static, 1 map, 1 interactive</span>
+          </div>
+        </div>
+
+        <aside class="hero-note" aria-label="Editing notes for the group">
+          <h2>Before publishing</h2>
+          <p>
+            The layout is ready to use, but the final text should sound like your group.
+            Replace the current paragraphs with your own interpretation and keep the page tight.
+          </p>
+          <ul>
+            <li>Put the three visualization files in the same folder as this page, or update the paths.</li>
+            <li>Rewrite the body text so it reflects your actual findings and caution.</li>
+            <li>Keep the story to roughly 500–1500 words total.</li>
+          </ul>
+        </aside>
+      </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <section id="intro" class="intro" aria-labelledby="intro-heading">
+      <div class="section-label eyebrow">Introduction</div>
+      <h2 id="intro-heading" class="block-title">A short story, not a full report</h2>
+      <p>
+        The dataset used in this course contains police incident records from San Francisco across multiple years.
+        In this page, we focus on incidents related to drug offenses and use three different visual forms to tell one
+        story: how the pattern changes over time, how it is distributed across space, and where the reader might want
+        to explore further.
+      </p>
+      <p>
+        That distinction matters. These records say something about reported and recorded incidents, not necessarily
+        the full underlying reality of drug use or street activity. A change in counts can reflect shifts in policing,
+        enforcement priorities, reporting behavior, or broader social conditions. The goal here is therefore not to make
+        sweeping causal claims, but to communicate what the data clearly shows and where interpretation should stay careful.
+      </p>
+    </section>
+
+    <section id="trend" class="story-block" aria-labelledby="trend-heading">
+      <div class="section-label eyebrow intro">Visualization 1 · Static chart</div>
+      <h2 id="trend-heading" class="block-title">The long-run trend sets up the story</h2>
+      <div class="section-copy">
+        <p>
+          The first figure gives the reader a clean starting point. A static chart works well here because the purpose is
+          not exploration, but orientation. It establishes whether drug offenses are rising, falling, or moving in phases,
+          and it lets the surrounding text frame the key takeaway before the reader sees more detail.
+        </p>
+        <p>
+          This is usually the best place to make your strongest editorial point. For example, if your bar chart shows a marked
+          decline after a certain period, you can say that clearly here. But this is also where you should be honest about
+          uncertainty: the figure captures recorded incidents over time, not a direct measure of drug activity itself.
+        </p>
+      </div>
+
+      <figure class="viz-card">
+        <div class="viz-frame">
+          <img src="drug_offenses_over_time.png" alt="Static chart showing drug offenses over time in San Francisco" />
+        </div>
+        <figcaption>
+          <strong>Figure 1.</strong> Static overview of the time trend. Replace this caption with one sentence that states the
+          concrete insight you want the reader to notice first.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="map" class="story-block" aria-labelledby="map-heading">
+      <div class="section-label eyebrow intro">Visualization 2 · Map</div>
+      <h2 id="map-heading" class="block-title">The map shows that the story is not evenly distributed</h2>
+      <div class="section-copy">
+        <p>
+          After the broad time trend, the page shifts to geography. This is the natural second step in a magazine-style story:
+          readers already know that something changed, and now they can see where the pattern is concentrated. A map is good at
+          making spatial clustering intuitive in a way that tables or paragraph descriptions are not.
+        </p>
+        <p>
+          In your final version, this paragraph should interpret the strongest spatial pattern without overstating it. Focus on
+          what the map reveals visually: which areas stand out, whether the concentration is stable or shifting, and how that adds
+          nuance to the first chart. Avoid turning a hotspot into a moral or policy conclusion unless your analysis truly supports it.
+        </p>
+      </div>
+
+      <figure class="viz-card">
+        <div class="viz-frame">
+          <iframe src="drug_heatmap_yearly_weighted.html" title="Interactive map of yearly weighted drug offense intensity"></iframe>
+        </div>
+        <figcaption>
+          <strong>Figure 2.</strong> Geographic distribution of drug-related incidents. Use the caption to tell the reader what is
+          spatially surprising or important here.
+        </figcaption>
+      </figure>
+
+      <div class="callout">
+        <strong>Interpretation note:</strong> a dense hotspot on a crime map can reflect many things besides underlying prevalence,
+        including policing strategy and reporting intensity. The design should make the pattern visible, while the text keeps the claim careful.
+      </div>
+    </section>
+
+    <section id="explore" class="story-block" aria-labelledby="explore-heading">
+      <div class="section-label eyebrow intro">Visualization 3 · Interactive Plotly chart</div>
+      <h2 id="explore-heading" class="block-title">The final graphic opens up controlled exploration</h2>
+      <div class="section-copy">
+        <p>
+          The last figure gives the reader a bit more agency. This is a nice way to end the story because the main argument has
+          already been made by the first two visuals. The interactive chart does not need to carry the narrative by itself. Instead,
+          it acts as a structured invitation to inspect neighborhoods, categories, or ranked trends more closely.
+        </p>
+        <p>
+          That balance is exactly what Week 8 is pushing toward: an author-driven page with limited reader freedom. The text guides
+          what matters, while the interaction rewards curiosity. In the finished version, you can use this paragraph to tell the reader
+          how to engage with the chart and what kind of comparison is worth trying first.
+        </p>
+      </div>
+
+      <figure class="viz-card">
+        <div class="viz-frame">
+          <iframe src="drug_concentration_topk_slide.html" title="Interactive Plotly chart showing ranked concentration over time"></iframe>
+        </div>
+        <figcaption>
+          <strong>Figure 3.</strong> Interactive view for deeper inspection. Add a short caption that suggests one useful way to explore the figure.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="notes" class="story-block outro" aria-labelledby="notes-heading">
+      <div class="section-label eyebrow">Closing reflection</div>
+      <h2 id="notes-heading" class="block-title">What the page should leave the reader with</h2>
+      <p>
+        A strong ending does not introduce new evidence. It briefly returns to the main point, ties the three visuals together,
+        and reminds the reader what kind of claim the data can support. In practice, that often means one sentence about the big pattern,
+        one sentence about the geographic nuance, and one sentence about why interpretation should remain cautious.
+      </p>
+      <p>
+        If your group wants to make this page feel more personal, replace the current headline and standfirst with a sharper title that
+        reflects your actual finding. You can also trim the current text heavily. The design is meant to give you a clean foundation,
+        not to lock you into this exact wording.
+      </p>
+
+      <div class="two-col-note">
+        <div class="mini-card">
+          <h3>Suggested repo structure</h3>
+          <p>
+            Keep <span class="inline">index.html</span> at the repo root or in <span class="inline">docs/</span>, and place the three files next to it.
+            Relative paths are easiest when publishing with GitHub Pages.
+          </p>
+        </div>
+        <div class="mini-card">
+          <h3>Easy group workflow</h3>
+          <p>
+            One person can maintain the page layout while others swap in plots, rewrite text, and adjust captions. Commit often so the site stays synchronized.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-box">
+        Built as a Week 8 style template for a GitHub Pages data story. Update the wording, captions, and file paths before publishing.
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
