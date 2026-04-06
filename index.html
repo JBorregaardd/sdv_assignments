@@ -23,7 +23,7 @@
     * { box-sizing: border-box; }
 
     html {
-      scroll-behavior: smooth;
+      scroll-behavior: smooth !important;
     }
 
     body {
@@ -32,6 +32,7 @@
       background: linear-gradient(180deg, #f4efe6 0%, var(--bg) 18%, #f8f6f1 100%);
       color: var(--ink);
       line-height: 1.7;
+      text-align: justify;
     }
 
     img, iframe {
@@ -42,6 +43,9 @@
 
     a {
       color: var(--accent);
+    }
+    .text-left {
+      text-align: left;
     }
 
     .page-shell {
@@ -109,6 +113,7 @@
       margin: 12px 0 18px;
       font-weight: 700;
       letter-spacing: -0.03em;
+      text-align: left;
     }
 
     .standfirst {
@@ -278,6 +283,29 @@
         padding: 10px;
       }
     }
+    .m-0 {
+      margin: 0 !important;
+    }
+
+/* style for back to top btn */
+    #backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* Hidden by default */
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 99;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  #backToTop:hover { background-color: #555; }
   </style>
 </head>
 <body>
@@ -301,9 +329,11 @@
         <div class="hero-copy">
           <h1>How have drug related incidents evolved in San Francisco since the early 2000s?</h1>
           <p class="standfirst">
-            Recorded drug offenses in San Francisco changed in two ways over the last two decades.
+            <em>
+              Recorded drug offenses in San Francisco changed in two ways over the last two decades.
             The total number of incidents dropped sharply after the late 2000s, but the pattern
             also became less evenly spread across the city and more concentrated in a single central hotspot in the Tenderloin area.
+            </em>
           </p>
           <div class="meta">
             <span><strong>By s181487, s260126, s234667 </strong></span>
@@ -314,21 +344,21 @@
 
     <div class="divider"></div>
 
-    <section id="intro" class="intro">
+    <section id="intro" class="story-block">
       <div class="section-label eyebrow">Introduction</div>
       <h2 class="block-title">Looking at drug offenses in San Francisco</h2>
-      <p>
-        The data used here comes from publicly available incident reports from the San Francisco Police Department,
-        covering the period from 2003 to 2025. Each entry corresponds to a recorded crime and includes information
-        such as the type of offense, when it happened, and where it took place. In this article the focus is specifically on
-        drug-related incidents such as possession and distribution of drugs
+      <div class="section-copy">
+        <p>
+        This story uses publicly available incident reports from the San Francisco Police Department covering the years 2003 to 2025. Each record describes a reported incident, including when it happened, where it happened, and what type of offense was registered. Here, the focus is on drug-related incidents such as possession, sale, and distribution of drugs
         <a class="citation" href="#ref-datasf">[DataSF]</a>.
       </p>
-      <p>
-        The data is utilized to examine how the number of drug offenses has changed over time, as well as how they
-        are distributed across the city. It is important to keep in mind that these are recorded incidents, so they
+
+        <p>
+          We use these records to examine two questions: how the number of reported drug incidents changed over time, and how those incidents were distributed across the city. It is important to keep in mind that these are recorded incidents, so they
         do not directly measure actual drug activity, but also reflect enforcement and reporting patterns.
-      </p>
+        </p>
+
+      </div>
     </section>
 
     <section id="trend" class="story-block">
@@ -337,22 +367,27 @@
 
       <div class="section-copy">
         <p>
-          Drug offenses are high in the early and late 2000s, reaching a peak around 2009, and then fall sharply
-          through the 2010s. By 2021, the number of recorded incidents is much lower than at the peak. In the most
-          recent years, the trend turns upward again.
+          Drug offenses are high in the early and late 2000s, reaching a peak around 2009. After that, the number falls sharply through the 2010s and remains well below the earlier high. By 2021, the number of recorded incidents is much lower than at the peak. In the most
+          recent years, the trend turns upward again. Overall, the figure suggests a long-term decline in recorded drug incidents, interrupted by a modest recent increase.
+
         </p>
       </div>
 
-      <figure class="viz-card">
+      <div class="section-copy">
+        <figure class="viz-card">
         <div class="viz-frame">
           <img src="drug_offenses_over_time.png" alt="Yearly recorded drug offenses in San Francisco" />
         </div>
         <figcaption>
-          <strong>Figure 1.</strong> Number of recorded drug offenses per year in San Francisco from 2003 to 2025.
+          <strong>Figure 1.</strong>
+          <em>
+            Number of recorded drug offenses per year in San Francisco from 2003 to 2025.
           The number of incidents rises into the late 2000s, peaks around 2009,
-          then drops sharply through the 2010s before increasing again in recent years.
+          then drops sharply through the 2010s before increasing again in recent years. Despite the recent increase, the level remains below the earlier peak.
+          </em>
         </figcaption>
       </figure>
+      </div>
 
       <div class="section-copy">
         <p>
@@ -389,18 +424,23 @@
         </p>
       </div>
 
-      <figure class="viz-card">
+      <div class="section-copy">
+        <figure class="viz-card">
         <div class="viz-frame">
           <iframe src="drug_heatmap_yearly_weighted.html"
             title="Map of recorded drug offense hotspots in San Francisco over time"></iframe>
         </div>
         <figcaption>
-          <strong>Figure 2.</strong> Time-animated heatmap of recorded drug offenses in San Francisco from 2003 to 2025.
+          <strong>Figure 2.</strong>
+          <em>
+            Time-animated heatmap of recorded drug offenses in San Francisco from 2003 to 2025.
             Incidents are aggregated into small spatial grid cells and visualized within each year.
             The map shows a persistent hotspot in the Tenderloin area throughout the entire period, while earlier hotspots,
             such as in Bayview–Hunters Point, gradually fade and are largely absent by the late 2010s.
+          </em>
         </figcaption>
       </figure>
+      </div>
 
       <div class="section-copy">
         <p>
@@ -408,9 +448,11 @@
           development of the area over time. The neighborhood has undergone significant changes, including
           redevelopment and demographic shifts, which may have influenced where drug-related incidents are
           recorded (<a href="#ref-bayview">Bayview–Hunters Point, Wikipedia</a>). At the same time, the continued
-          concentration in the Tenderloin may reflect both the visibility of drug activity and a stronger
-          focus of enforcement in central parts of the city.
+  concentration in the Tenderloin should be interpreted with caution. It may reflect both the visibility
+  of drug activity and a stronger focus of enforcement in central parts of the city
+  (<a href="#ref-SFPC">San Francisco Police Commission, 2023</a>).
         </p>
+
       </div>
     </section>
 
@@ -433,33 +475,61 @@
         </p>
       </div>
 
-      <figure class="viz-card">
+      <div class="section-copy">
+        <figure class="viz-card">
         <div class="viz-frame">
           <iframe class="plotly-iframe" src="drug_concentration_topk_slide.html" title="Interactive chart showing the share of recorded drug offenses captured by the top grid cells over time"></iframe>
         </div>
         <figcaption>
-          <strong>Figure 3.</strong> Interactive line chart showing how much of all recorded drug offenses is captured
-          by the top <em>k</em> most active grid cells each year. The slider changes the number of cells included.
+          <strong>Figure 3.</strong>
+          <em>
+            Interactive line chart showing how much of all recorded drug offenses is captured
+          by the top k most active grid cells each year. The slider changes the number of cells included.
           Higher values over time show that incidents are becoming more concentrated in a smaller number of locations.
+          </em>
         </figcaption>
       </figure>
+      </div>
     </section>
 
     <section id="tldr" class="story-block outro">
       <h2 class="block-title">Fewer incidents, but more concentrated</h2>
-      <p>
-        The San Francisco drug offense data reveals two key trends. First, the number of recorded drug offenses rises into the late 2000s, then
-        drops significantly throughout the 2010s, before increasing again in recent years. Second, as the total
-        number of incidents falls, they become more concentrated in Tenderloin and nearby areas. In the earlier years,
-        there is also a smaller hotspot in the Bayview-Hunters Point area in the southeast
-        of the city. Compared to the Tenderloin hotspot, this hotspot dissolves over time.
-      </p>
+
+
+      <p class="m-0">
+Taken together, the figures point to two main developments in recorded drug incidents in San Francisco. First, the total number of incidents rises into the late 2000s, then falls sharply through the 2010s, before increasing again in the most recent years. Second, the remaining incidents become increasingly concentrated in and around the Tenderloin, while an earlier hotspot in Bayview–Hunters Point becomes weaker over time.
+</p>
+<p class="m-0">
+This means the story is not simply that there are fewer recorded incidents overall. It is also that the spatial pattern changes: incidents become less spread across the city and more tightly clustered in a small number of central locations. Because the data comes from police incident reports, these patterns should be interpreted as patterns in recorded and enforced incidents, not as direct measures of underlying drug activity.
+</p>
     </section>
 
-    <section id="references" class="story-block references-block">
+    <section id="notes" class="story-block">
+      <div class="section-label eyebrow">Notes</div>
+      <h2 class="block-title">Notes on data and interpretation</h2>
+
+
+      <div class="section-copy">
+        <p class="note">
+    <strong>Method note.</strong> The analysis uses San Francisco Police Department incident-report datasets:
+    a historical dataset covering 2003–2025. Because these
+    records come from different city data systems, long-run comparisons should be interpreted with some caution,
+    especially around the transition period.
+  </p>
+
+  <p class="note">
+    <strong>Interpretation note.</strong> These data reflect recorded police incidents, not direct measures of actual
+    drug activity. Patterns in the figures may therefore capture changes in reporting and enforcement as well as
+    changes in underlying activity.
+  </p>
+      </div>
+    </section>
+
+    <section id="references" class="story-block">
       <div class="section-label eyebrow">References</div>
       <h2 class="block-title">References</h2>
-      <ol class="references-list">
+      <div class="section-copy text-left">
+        <ol class="references-list">
         <li id="ref-brookings">
           Brookings Institution. (2018). <em>The geography of prosperity</em>. The Hamilton Project.
           <a href="https://www.brookings.edu/articles/the-geography-of-prosperity/" target="_blank" rel="noopener noreferrer">
@@ -492,8 +562,34 @@
             https://en.wikipedia.org/wiki/Bayview%E2%80%93Hunters_Point,_San_Francisco
           </a>
         </li>
+        <li id="ref-SFPC">
+  San Francisco Police Commission. <em>Open Air Drug Market Collaboration Presentation</em> (2023).
+  <a href="https://www.sf.gov/sites/default/files/2023-06/PoliceCommission61423-Police%20Commission%20Presentation%20Open%20Air%20Drug%20Market%20Collaboration%2006132023.pdf" target="_blank">Open source</a>
+</li>
       </ol>
+      </div>
     </section>
+
+    <button id="backToTop" title="Go to top">↑</button>
   </div>
+
+  <script>
+  const btn = document.getElementById("backToTop");
+
+  // Show button when user scrolls down 300px
+  window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+      btn.style.display = "block";
+    } else {
+      btn.style.display = "none";
+    }
+  };
+
+  // Smooth scroll to top when clicked
+  btn.onclick = function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+</script>
+
 </body>
 </html>
