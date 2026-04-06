@@ -179,6 +179,13 @@
       background: linear-gradient(180deg, #fffdf8 0%, #faf6f0 100%);
     }
 
+    .plotly-iframe {
+      width: 100%;
+      height: 650px;
+      border-radius: 12px;
+      background: white;
+    }
+
     .viz-frame img,
     .viz-frame iframe {
       width: 100%;
@@ -428,7 +435,7 @@
 
       <figure class="viz-card">
         <div class="viz-frame">
-          <iframe src="drug_concentration_topk_slide.html" title="Interactive chart showing the share of recorded drug offenses captured by the top grid cells over time"></iframe>
+          <iframe class="plotly-iframe" src="drug_concentration_topk_slide.html" title="Interactive chart showing the share of recorded drug offenses captured by the top grid cells over time"></iframe>
         </div>
         <figcaption>
           <strong>Figure 3.</strong> Interactive line chart showing how much of all recorded drug offenses is captured
