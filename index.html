@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Drug Offenses in San Francisco | Data Story</title>
-  <meta name="description" content="A magazine-style narrative visualization about drug offense patterns in San Francisco." />
+  <title>Drug Offenses in San Francisco</title>
+  <meta name="description" content="Drug offense patterns in San Francisco from 2003 to 2025." />
   <style>
     :root {
       --bg: #f7f4ee;
@@ -97,7 +97,7 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1fr;
       gap: 32px;
       align-items: end;
     }
@@ -124,32 +124,6 @@
       color: var(--muted);
       font-size: 0.95rem;
       font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .hero-note {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-
-    .hero-note h2 {
-      margin: 0 0 10px;
-      font-size: 1.1rem;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .hero-note p,
-    .hero-note li {
-      font-size: 0.98rem;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .hero-note ul {
-      padding-left: 18px;
-      margin: 12px 0 0;
     }
 
     .divider {
@@ -234,34 +208,6 @@
       font-size: 1rem;
     }
 
-    .two-col-note {
-      width: min(100%, 900px);
-      margin: 26px auto 0;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .mini-card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 18px;
-    }
-
-    .mini-card h3 {
-      margin: 0 0 8px;
-      font-size: 1rem;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .mini-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.96rem;
-      line-height: 1.6;
-    }
-
     footer {
       padding: 42px 0 70px;
     }
@@ -276,19 +222,7 @@
       font-size: 0.92rem;
     }
 
-    code.inline {
-      background: rgba(124, 63, 44, 0.08);
-      padding: 0.15rem 0.35rem;
-      border-radius: 0.35rem;
-      font-size: 0.9em;
-    }
-
     @media (max-width: 900px) {
-      .hero-grid,
-      .two-col-note {
-        grid-template-columns: 1fr;
-      }
-
       header.hero {
         padding-top: 48px;
       }
@@ -320,7 +254,7 @@
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="eyebrow">02460 Data Story</div>
+      <div class="eyebrow">02460</div>
       <nav class="nav-links" aria-label="Page sections">
         <a href="#intro">Intro</a>
         <a href="#trend">Trend</a>
@@ -335,184 +269,135 @@
     <header class="hero">
       <div class="hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">Magazine-style narrative visualization</div>
           <h1>Drug offenses fell in San Francisco, but the pattern narrowed into hotspots</h1>
           <p class="standfirst">
-            Recorded drug offenses in San Francisco changed in two ways over the last two decades. 
-            The total number of incidents dropped sharply after the late 2000s, but the pattern 
-            also became less evenly spread across the city and more concentrated in a small 
+            Recorded drug offenses in San Francisco changed in two ways over the last two decades.
+            The total number of incidents dropped sharply after the late 2000s, but the pattern
+            also became less evenly spread across the city and more concentrated in a small
             number of hotspots.
           </p>
           <div class="meta">
-            <span><strong>Course:</strong> Social Data Analysis and Visualization</span>
-            <span><strong>Format:</strong> single-page story</span>
-            <span><strong>Visuals:</strong> 1 static, 1 map, 1 interactive</span>
+            <span><strong>Course:</strong> 02460 Social Data Analysis and Visualization</span>
           </div>
         </div>
-
-        <aside class="hero-note" aria-label="Editing notes for the group">
-          <h2>Before publishing</h2>
-          <p>
-            The layout is ready to use, but the final text should sound like your group.
-            Replace the current paragraphs with your own interpretation and keep the page tight.
-          </p>
-          <ul>
-            <li>Put the three visualization files in the same folder as this page, or update the paths.</li>
-            <li>Rewrite the body text so it reflects your actual findings and caution.</li>
-            <li>Keep the story to roughly 500–1500 words total.</li>
-          </ul>
-        </aside>
       </div>
     </header>
 
     <div class="divider"></div>
 
-    <section id="intro" class="intro" aria-labelledby="intro-heading">
+    <section id="intro" class="intro">
       <div class="section-label eyebrow">Introduction</div>
-      <h2 id="intro-heading" class="block-title">A short story, not a full report</h2>
+      <h2 class="block-title">How drug offense patterns changed over time</h2>
       <p>
-        This story looks at recorded drug offenses in San Francisco from 2003 to 2025. 
-        The first pattern is easy to see: the total number of incidents rises into the late 
-        2000s, then falls strongly throughout the 2010s, and finally turns upward again in recent years. 
-        The other pattern is spacial and very interesting to look at. As the total number of incidents fell, the 
-        remaining incidents became more concentrated in a smaller set of locations rather than 
-        disappearing evenly across the city.
+        This analysis looks at recorded drug offenses in San Francisco from 2003 to 2025.
+        The total number of incidents rises into the late 2000s, then falls strongly throughout the 2010s,
+        and finally turns upward again in recent years. At the same time, the spatial pattern changes:
+        as the number of incidents falls, the remaining incidents become more concentrated in fewer locations
+        rather than disappearing evenly across the city.
       </p>
       <p>
-        That does not mean the data reflects drug activity directly. These are 
-        police-recorded incidents, so the pattern can reflect enforcement, reporting, and where 
-        police attention is concentrated, not just where drug activity happens. Still, the data 
-        is useful for showing how the recorded geography of drug offenses changed over time.
+        These data reflect police-recorded incidents and therefore capture not only underlying activity,
+        but also enforcement and reporting patterns. Still, they provide a useful view of how the geography
+        of recorded drug offenses has changed over time.
       </p>
     </section>
 
-    <section id="trend" class="story-block" aria-labelledby="trend-heading">
-      <div class="section-label eyebrow intro">Visualization 1 · Static chart</div>
-      <h2 id="trend-heading" class="block-title">The total number of recorded drug offenses drops sharply after the late 2000s</h2>
+    <section id="trend" class="story-block">
+      <div class="section-label eyebrow">Trend over time</div>
+      <h2 class="block-title">The number of recorded drug offenses drops after the late 2000s</h2>
       <div class="section-copy">
         <p>
-          The first figure gives the overall time trend. Drug offenses are high in the early and late 2000s, 
-          reach a peak around 2009, and then fall sharply through the 2010s. By 2021, the number of recorded 
-          incidents is much lower than at the peak. After that, the curve turns upward again, with a noticeable 
-          rebound in the most recent years.
+          Drug offenses are high in the early and late 2000s, reaching a peak around 2009, and then fall sharply
+          through the 2010s. By 2021, the number of recorded incidents is much lower than at the peak. In the most
+          recent years, the trend turns upward again.
         </p>
         <p>
-          On its own, that looks like a simple rise-and-fall story. But the main point of this page is that the 
-          decline was not evenly spread across the city. The total number of incidents dropped, but the pattern 
-          that remained became more concentrated. So this figure works best as a starting point: it shows that 
-          the overall volume changed a lot, but still not how the geography of those incidents changed with it yet.
+          This overall decline is substantial, but it does not describe how incidents are distributed across the city.
+          While the total number decreases, the remaining incidents do not disappear evenly.
         </p>
       </div>
 
       <figure class="viz-card">
         <div class="viz-frame">
-          <img src="drug_offenses_over_time.png" alt="Static chart showing drug offenses over time in San Francisco" />
+          <img src="drug_offenses_over_time.png" alt="Drug offenses over time in San Francisco" />
         </div>
         <figcaption>
-          <strong>Figure 1.</strong> Recorded drug offenses peak in the late 2000s, 
-          then fall strongly through the 2010s before rising again in recent years.
+          <strong>Figure 1.</strong> Recorded drug offenses peak in the late 2000s,
+          then fall through the 2010s before rising again in recent years.
         </figcaption>
       </figure>
     </section>
 
-    <section id="map" class="story-block" aria-labelledby="map-heading">
-      <div class="section-label eyebrow intro">Visualization 2 · Map</div>
-      <h2 id="map-heading" class="block-title">The decline is not evenly spread across the city</h2>
+    <section id="map" class="story-block">
+      <div class="section-label eyebrow">Spatial distribution</div>
+      <h2 class="block-title">The decline is not evenly distributed across the city</h2>
       <div class="section-copy">
         <p>
-          The second figure shows the spacial distribution across different years. Once the total number of 
-          incidents starts falling, the next question is whether that decline happened evenly across 
-          the city. The map suggests that it did not. Instead of fading out everywhere at the same rate, 
-          recorded drug offenses stay heavily concentrated in smaller central hotspots.
+          As the total number of incidents falls, the spatial distribution shows a clear pattern.
+          Instead of declining uniformly, incidents remain concentrated in a smaller number of central areas.
         </p>
         <p>
-          The strongest concentration appears to be around Tenderloin and nearby parts of the city center, with 
-          other clusters in areas like Southern and Mission. This matters because it changes how the decline in 
-          Figure 1 is interpreted and read. The citywide total incidents falls, but the remaining incidents are 
-          not spread out evenly. They become more geographically concentrated.
+          The strongest concentration appears around the Tenderloin and nearby parts of the city center,
+          with additional clusters in areas such as Southern and Mission. The overall decline in incidents
+          therefore coincides with increasing spatial concentration.
         </p>
       </div>
 
       <figure class="viz-card">
         <div class="viz-frame">
-          <iframe src="drug_heatmap_yearly_weighted.html" title="Interactive map of yearly weighted drug offense intensity"></iframe>
+          <iframe src="drug_heatmap_yearly_weighted.html"></iframe>
         </div>
         <figcaption>
-          <strong>Figure 2.</strong> Recorded drug offenses are not spread evenly across San Francisco: 
-          the strongest hotspot is in and around the Tenderloin area, with additional concentration in nearby 
-          central areas.
+          <strong>Figure 2.</strong> Recorded drug offenses remain concentrated in central areas,
+          particularly around the Tenderloin.
         </figcaption>
       </figure>
 
       <div class="callout">
-        <strong>Interpretation note:</strong> a hotspot on this map should not be read as a direct measure of 
-        underlying drug activity. It can also reflect where incidents are recorded, where enforcement is 
-        concentrated, and how reporting happens across the city.
+        <strong>Interpretation note:</strong> hotspots reflect recorded incidents and may also capture
+        enforcement and reporting patterns, not only underlying activity.
       </div>
     </section>
 
-    <section id="explore" class="story-block" aria-labelledby="explore-heading">
-      <div class="section-label eyebrow intro">Visualization 3 · Interactive Plotly chart</div>
-      <h2 id="explore-heading" class="block-title">A smaller number of places account for a larger share over time</h2>
+    <section id="explore" class="story-block">
+      <div class="section-label eyebrow">Concentration over time</div>
+      <h2 class="block-title">A smaller number of locations account for a larger share of incidents</h2>
       <div class="section-copy">
         <p>
-          The final figure focuses on the actual strength of the concentration in offenses. Instead of looking at raw counts or maps, 
-          it shows how much of the total is captured by the top locations over time. If incidents were evenly 
-          distributed, this line would stay relatively flat. It does not.
+          The final figure shows how much of the total number of incidents is captured by the most active locations.
+          Over time, a larger share of incidents is concentrated in fewer places.
         </p>
         <p>
-          Over time, a larger share of recorded drug offenses is accounted for by a smaller number of places. 
-          In the early years, the top locations already hold a large fraction of incidents, but that share 
-          increases further in the more recent period. This reinforces the earlier point: the overall number 
-          of incidents drops, but the pattern that remains becomes more concentrated rather than spread out.
+          Even as the overall number of incidents declines, the concentration increases, reinforcing the pattern
+          observed in the map.
         </p>
       </div>
 
       <figure class="viz-card">
         <div class="viz-frame">
-          <iframe src="drug_concentration_topk_slide.html" title="Interactive Plotly chart showing ranked concentration over time"></iframe>
+          <iframe src="drug_concentration_topk_slide.html"></iframe>
         </div>
         <figcaption>
-          <strong>Figure 3.</strong> Share of total incidents captured by the top locations. 
-          The increase over time shows that drug offenses become more spatially concentrated.
+          <strong>Figure 3.</strong> Share of total incidents captured by the top locations over time.
         </figcaption>
       </figure>
     </section>
 
-    <section id="notes" class="story-block outro" aria-labelledby="notes-heading">
-      <div class="section-label eyebrow">Closing reflection</div>
-      <h2 id="notes-heading" class="block-title">Fewer incidents, but less evenly distributed</h2>
+    <section id="notes" class="story-block outro">
+      <div class="section-label eyebrow">Conclusion</div>
+      <h2 class="block-title">Fewer incidents, but more concentrated</h2>
       <p>
-        Taken together, the three figures show a simple but important shift. The total number of recorded 
-        drug offenses falls after the late 2000s, but the pattern does not flatten out across the city. 
-        Instead, the remaining incidents become more concentrated in a smaller set of locations.
+        The total number of recorded drug offenses falls after the late 2000s, but the remaining incidents become
+        increasingly concentrated in a smaller number of locations.
       </p>
       <p>
-        This does not say everything about drug activity in San Francisco. The data reflects recorded 
-        incidents, which are shaped by enforcement, reporting, and where attention is focused. Still, it 
-        shows a clear change in how these incidents are distributed: fewer overall, but more concentrated.
+        This highlights a shift in the spatial structure of recorded incidents: fewer overall, but less evenly distributed.
       </p>
-
-      <div class="two-col-note">
-        <div class="mini-card">
-          <h3>Suggested repo structure</h3>
-          <p>
-            Keep <span class="inline">index.html</span> at the repo root or in <span class="inline">docs/</span>, and place the three files next to it.
-            Relative paths are easiest when publishing with GitHub Pages.
-          </p>
-        </div>
-        <div class="mini-card">
-          <h3>Easy group workflow</h3>
-          <p>
-            One person can maintain the page layout while others swap in plots, rewrite text, and adjust captions. Commit often so the site stays synchronized.
-          </p>
-        </div>
-      </div>
     </section>
 
     <footer>
       <div class="footer-box">
-        Built as a Week 8 style template for a GitHub Pages data story. Update the wording, captions, and file paths before publishing.
+        Data source: San Francisco Police Department incident reports.
       </div>
     </footer>
   </div>
