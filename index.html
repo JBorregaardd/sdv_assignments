@@ -410,24 +410,31 @@
 
     <section id="explore" class="story-block">
       <div class="section-label eyebrow">Concentration over time</div>
-      <h2 class="block-title">A smaller number of locations account for a larger share of incidents</h2>
+      <h2 class="block-title">A growing share of incidents is concentrated in a few small areas</h2>
+
       <div class="section-copy">
         <p>
-          The final figure shows how much of the total number of incidents is captured by the most active locations.
-          Over time, a larger share of incidents is concentrated in fewer places.
+          The final figure looks more directly at concentration. Instead of showing where incidents happen on a map,
+          it divides the city into small grid cells of roughly 300 by 300 meters and shows how large a share of all
+          recorded drug offenses falls within the top <em>k</em> most active cells each year.
         </p>
         <p>
-          Even as the overall number of incidents declines, the concentration increases, reinforcing the pattern
-          observed in the map.
+          The pattern is clear: over time, a larger share of incidents is captured by fewer locations. In 2003, the
+          single most active cell accounts for 8.4% of all recorded drug offenses, while in 2021 it accounts for about
+          25%. Looking more broadly, the top 20 cells contain around 59% of all incidents in 2003, compared with 76%
+          in 2025. This supports the pattern seen in the heatmap, where drug offenses become increasingly concentrated
+          in a smaller number of hotspots over time.
         </p>
       </div>
 
       <figure class="viz-card">
         <div class="viz-frame">
-          <iframe src="drug_concentration_topk_slide.html" title="Interactive chart of concentration in recorded drug offenses over time"></iframe>
+          <iframe src="drug_concentration_topk_slide.html" title="Interactive chart showing the share of recorded drug offenses captured by the top grid cells over time"></iframe>
         </div>
         <figcaption>
-          <strong>Figure 3.</strong> Share of total incidents captured by the top locations over time.
+          <strong>Figure 3.</strong> Interactive line chart showing how much of all recorded drug offenses is captured
+          by the top <em>k</em> most active grid cells each year. The slider changes the number of cells included.
+          Higher values over time show that incidents are becoming more concentrated in a smaller number of locations.
         </figcaption>
       </figure>
     </section>
