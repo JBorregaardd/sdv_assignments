@@ -135,7 +135,8 @@
 
     .intro,
     .section-copy,
-    .outro {
+    .outro,
+    .references-block {
       width: min(100%, var(--text));
       margin: 0 auto;
     }
@@ -209,6 +210,26 @@
       font-size: 1rem;
     }
 
+    .citation {
+      font-size: 0.92em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .references-list {
+      margin: 14px 0 0;
+      padding-left: 20px;
+      font-size: 1rem;
+    }
+
+    .references-list li {
+      margin-bottom: 14px;
+    }
+
+    .references-list a {
+      overflow-wrap: anywhere;
+    }
+
     footer {
       padding: 42px 0 70px;
     }
@@ -262,6 +283,7 @@
         <a href="#map">Map</a>
         <a href="#explore">Interactive</a>
         <a href="#notes">Notes</a>
+        <a href="#references">References</a>
       </nav>
     </div>
   </div>
@@ -286,14 +308,15 @@
 
     <div class="divider"></div>
 
-     <section id="intro" class="intro">
+    <section id="intro" class="intro">
       <div class="section-label eyebrow">Introduction</div>
       <h2 class="block-title">Looking at drug offenses in San Francisco</h2>
       <p>
         The data used here comes from publicly available incident reports from the San Francisco Police Department,
         covering the period from 2003 to 2025. Each entry corresponds to a recorded crime and includes information
         such as the type of offense, when it happened, and where it took place. In this article the focus is specifically on
-        drug-related incidents such as possession and distribution of drugs.
+        drug-related incidents such as possession and distribution of drugs
+        <a class="citation" href="#ref-datasf">[DataSF]</a>.
       </p>
       <p>
         The data is utilized to examine how the number of drug offenses has changed over time, as well as how they
@@ -303,7 +326,7 @@
       <p>
         We find two main patterns in the data. First, the number of recorded drug offenses rises into the late 2000s, then
         drops significantly throughout the 2010s, before increasing again in recent years. Second, as the total
-        number of incidents falls, they become more concentrated in Tenderloin and nearby areas. In the earlier years, 
+        number of incidents falls, they become more concentrated in Tenderloin and nearby areas. In the earlier years,
         there is also a smaller hotspot in the Bayview-Hunters Point area in the southeast
         of the city. Compared to the Tenderloin hotspot, this hotspot dissolves over time.
       </p>
@@ -337,8 +360,10 @@
           The decline in recorded drug offenses could be related to several factors, including changes in enforcement,
           shifts in drug markets, or broader social and economic developments. Over the same period, San Francisco has
           experienced significant economic growth, particularly driven by the tech boom, which has reshaped the city
-          and contributed to increasing inequality (Brookings Institution, 2018). While these changes provide important
-          context, the data alone does not allow us to determine the specific causes of the decline.
+          and contributed to increasing inequality
+          <a class="citation" href="#ref-brookings">(Brookings Institution, 2018)</a>.
+          While these changes provide important context, the data alone does not allow us to determine the specific causes
+          of the decline.
         </p>
       </div>
     </section>
@@ -360,7 +385,7 @@
 
       <figure class="viz-card">
         <div class="viz-frame">
-          <iframe src="drug_heatmap_yearly_weighted.html"></iframe>
+          <iframe src="drug_heatmap_yearly_weighted.html" title="Map of recorded drug offense hotspots in San Francisco over time"></iframe>
         </div>
         <figcaption>
           <strong>Figure 2.</strong> Recorded drug offenses remain concentrated in central areas,
@@ -390,7 +415,7 @@
 
       <figure class="viz-card">
         <div class="viz-frame">
-          <iframe src="drug_concentration_topk_slide.html"></iframe>
+          <iframe src="drug_concentration_topk_slide.html" title="Interactive chart of concentration in recorded drug offenses over time"></iframe>
         </div>
         <figcaption>
           <strong>Figure 3.</strong> Share of total incidents captured by the top locations over time.
@@ -410,9 +435,32 @@
       </p>
     </section>
 
+    <section id="references" class="story-block references-block">
+      <div class="section-label eyebrow">References</div>
+      <h2 class="block-title">References</h2>
+      <ol class="references-list">
+        <li id="ref-brookings">
+          Brookings Institution. (2018). <em>The geography of prosperity</em>. The Hamilton Project.
+          <a href="https://www.brookings.edu/articles/the-geography-of-prosperity/" target="_blank" rel="noopener noreferrer">
+            Open source
+          </a>
+        </li>
+        <li id="ref-datasf">
+          DataSF. <em>Police Department Incident Reports</em>. San Francisco Open Data.
+          <a href="https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-2018-to-Present/wg3w-h783" target="_blank" rel="noopener noreferrer">
+            2018 to present
+          </a>
+          and
+          <a href="https://data.sfgov.org/Public-Safety/Sf-drug-arrest/xfre-2aqu" target="_blank" rel="noopener noreferrer">
+            historical drug arrest dataset
+          </a>.
+        </li>
+      </ol>
+    </section>
+
     <footer>
       <div class="footer-box">
-        Data source: San Francisco Police Department incident reports.
+        Data source: San Francisco Police Department incident reports via DataSF.
       </div>
     </footer>
   </div>
